@@ -1,5 +1,14 @@
+import ProductStateProvider from "@/stores";
+import TopNav from "./components/topnav";
+import Home from "./views/home";
+
 function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <ProductStateProvider>
+      <TopNav />
+      <Home />
+    </ProductStateProvider>
+  );
 }
 
 export default App;
