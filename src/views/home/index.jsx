@@ -1,9 +1,8 @@
-import { useReducer } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import { useProductInfo, useDispatch } from "@/stores";
 import ProductList from "@/components/products-list";
 import ProductFilter from "@/components/products-filter";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
   const { filterData } = useProductInfo();
@@ -11,10 +10,6 @@ const Home = () => {
 
   const PRODUCTS_URI =
     "https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json";
-
-  function handleCheckboxClick(payload) {
-    console.log(payload);
-  }
 
   function extractFilterDataFromTheProduct(products) {
     const keysToLookup = Object.keys(filterData);
@@ -60,10 +55,7 @@ const Home = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-2">
-          <ProductFilter
-            metadata={filterData}
-            onCheckboxClick={handleCheckboxClick}
-          />
+          <ProductFilter />
         </div>
         <div className="col-10">
           <ProductList

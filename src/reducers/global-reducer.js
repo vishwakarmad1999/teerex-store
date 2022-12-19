@@ -6,10 +6,22 @@ export default function (state, action) {
         filterData: action.payload,
       };
     }
+    case "setFilteredProducts": {
+      return {
+        ...state,
+        filteredProducts: action.payload,
+      };
+    }
     case "setProducts": {
       return {
         ...state,
         products: action.payload,
+      };
+    }
+    case "setSelectedCheckboxes": {
+      return {
+        ...state,
+        selectedCheckboxes: action.payload,
       };
     }
   }

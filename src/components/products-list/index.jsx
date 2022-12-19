@@ -5,7 +5,7 @@ import Product from "../product";
 import http from "@/helpers/http";
 
 const ProductsList = ({ dataUri, onProductsFetch }) => {
-  const { products } = useProductInfo();
+  const { filteredProducts } = useProductInfo();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,6 +23,11 @@ const ProductsList = ({ dataUri, onProductsFetch }) => {
       type: "setProducts",
       payload: products,
     });
+
+    dispatch({
+      type: "setFilteredProducts",
+      payload: products,
+    });
   }
 
   function handleProductClick(id) {
@@ -30,14 +35,14 @@ const ProductsList = ({ dataUri, onProductsFetch }) => {
   }
 
   // TODO: Replace it with dynamic UI
-  if (!products) {
+  if (!filteredProducts) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <>
       <div className="row">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Product key={product.id} {...product} onClick={handleProductClick} />
         ))}
       </div>

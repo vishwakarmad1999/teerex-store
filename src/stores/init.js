@@ -1,4 +1,4 @@
-const initialState = {
+let initialState = {
   filterData: {
     color: {
       title: "Color",
@@ -17,6 +17,16 @@ const initialState = {
       items: [],
     },
   },
+  filteredProducts: [],
+};
+
+const selectedCheckboxes = {};
+Object.keys(initialState.filterData).forEach((key) => {
+  selectedCheckboxes[key] = new Set();
+});
+initialState = {
+  ...initialState,
+  selectedCheckboxes,
 };
 
 export default initialState;
