@@ -17,7 +17,9 @@ let initialState = {
       items: [],
     },
   },
+  products: [],
   filteredProducts: [],
+  searchText: "",
 };
 
 const selectedCheckboxes = {};

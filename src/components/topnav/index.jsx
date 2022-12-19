@@ -1,6 +1,30 @@
-import React from "react";
+import { useProductInfo, useDispatch } from "@/stores";
+import filterProductsPipeline from "@/helpers/utils";
 
 const TopNav = () => {
+  const { searchText, selectedCheckboxes, products } = useProductInfo();
+  const dispatch = useDispatch();
+
+  function handleInputChange(e) {
+    const searchText = e.target.value;
+
+    const newProducts = filterProductsPipeline({
+      products,
+      searchText,
+      selectedCheckboxes,
+    });
+
+    dispatch({
+      type: "setSearchText",
+      payload: searchText,
+    });
+
+    dispatch({
+      type: "setFilteredProducts",
+      payload: newProducts,
+    });
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark">
       <div className="container-fluid">
@@ -10,8 +34,9 @@ const TopNav = () => {
         <input
           className="form-control w-50"
           type="search"
-          placeholder="Search"
-          aria-label="Search"
+          placeholder="Search products"
+          value={searchText}
+          onChange={handleInputChange}
         />
         <button className="btn btn-outline-light" type="submit">
           Cart

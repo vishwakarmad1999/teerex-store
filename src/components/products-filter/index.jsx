@@ -1,25 +1,16 @@
+import filterProductsPipeline from "@/helpers/utils";
 import { useProductInfo, useDispatch } from "@/stores";
 
 const ProductsFilter = () => {
-  const { filterData, selectedCheckboxes, products } = useProductInfo();
+  const { filterData, selectedCheckboxes, products, searchText } =
+    useProductInfo();
   const dispatch = useDispatch();
 
   function filterProducts(selectedCheckboxes) {
-    const keys = Object.keys(selectedCheckboxes);
-
-    const newProducts = products.filter((product) => {
-      for (let i = 0; i < keys?.length; i++) {
-        const key = keys[i];
-        const value = product[key];
-
-        if (
-          selectedCheckboxes[key]?.size &&
-          !selectedCheckboxes[key].has(value)
-        ) {
-          return false;
-        }
-      }
-      return true;
+    const newProducts = filterProductsPipeline({
+      products,
+      searchText,
+      selectedCheckboxes,
     });
 
     dispatch({

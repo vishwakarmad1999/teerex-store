@@ -24,5 +24,11 @@ export default function (state, action) {
         selectedCheckboxes: action.payload,
       };
     }
+    case "setSearchText": {
+      return {
+        ...state,
+        searchText: action.payload,
+      };
+    }
   }
 }
