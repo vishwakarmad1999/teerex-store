@@ -20,6 +20,8 @@ let initialState = {
   products: [],
   filteredProducts: [],
   searchText: "",
+  cart: {},
+  errorMessage: null,
 };
 
 const selectedCheckboxes = {};

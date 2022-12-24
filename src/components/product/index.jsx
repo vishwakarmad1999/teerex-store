@@ -1,7 +1,7 @@
 import React from "react";
 
 const Product = (props) => {
-  const { id, name, imageURL, currency, price, onClick } = props;
+  const { id, name, imageURL, currency, price, onClick, quantity } = props;
 
   return (
     <div className="card product row m-3">
@@ -14,8 +14,11 @@ const Product = (props) => {
           </div>
           <div className="col-7">
             <div className="w-100 d-grid">
-              <button className="btn btn-primary" onClick={() => onClick(id)}>
-                Add
+              <button
+                className="btn btn-primary"
+                onClick={() => onClick({ id, quantity })}
+              >
+                Add ({quantity})
               </button>
             </div>
           </div>

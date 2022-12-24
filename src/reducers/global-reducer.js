@@ -30,5 +30,17 @@ export default function (state, action) {
         searchText: action.payload,
       };
     }
+    case "setCart": {
+      return {
+        ...state,
+        cart: action.payload,
+      };
+    }
+    case "setErrorMessage": {
+      return {
+        ...state,
+        errorMessage: action.payload,
+      };
+    }
   }
 }

@@ -1,11 +1,13 @@
 import { useProductInfo, useDispatch } from "@/stores";
 import ProductList from "@/components/products-list";
 import ProductFilter from "@/components/products-filter";
+import AlertMessage from "@/components/alert-message";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap";
 
 const Home = () => {
-  const { filterData } = useProductInfo();
+  const { filterData, errorMessage } = useProductInfo();
   const dispatch = useDispatch();
 
   const PRODUCTS_URI =
@@ -53,6 +55,12 @@ const Home = () => {
 
   return (
     <div className="container-fluid">
+      <div className="row">
+        <div className="col-8 offset-2 mt-4">
+          <AlertMessage />
+        </div>
+      </div>
+
       <div className="row">
         <div className="col-2">
           <ProductFilter />

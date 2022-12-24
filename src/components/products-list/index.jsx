@@ -5,7 +5,7 @@ import Product from "../product";
 import http from "@/helpers/http";
 
 const ProductsList = ({ dataUri, onProductsFetch }) => {
-  const { filteredProducts } = useProductInfo();
+  const { filteredProducts, cart } = useProductInfo();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,8 +30,47 @@ const ProductsList = ({ dataUri, onProductsFetch }) => {
     });
   }
 
-  function handleProductClick(id) {
-    console.log(id);
+  function handleProductClick({ id, quantity }) {
+    if (quantity === 0) {
+      dispatch({
+        type: "setErrorMessage",
+        payload: "The product is out of stock!",
+      });
+    } else {
+      let newCart = null;
+
+      if (cart[id]) {
+        newCart = {
+          ...cart,
+          [id]: cart[id] + 1,
+        };
+      } else {
+        newCart = {
+          ...cart,
+          [id]: 1,
+        };
+      }
+
+      const newProducts = filteredProducts.map((prod) => {
+        if (prod.id === id) {
+          return {
+            ...prod,
+            quantity: prod.quantity - 1,
+          };
+        }
+        return prod;
+      });
+
+      dispatch({
+        type: "setFilteredProducts",
+        payload: newProducts,
+      });
+
+      dispatch({
+        type: "setCart",
+        payload: newCart,
+      });
+    }
   }
 
   // TODO: Replace it with dynamic UI
