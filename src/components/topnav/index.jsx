@@ -1,3 +1,4 @@
+import { Link, Outlet } from "react-router-dom";
 import { useProductInfo, useDispatch } from "@/stores";
 import filterProductsPipeline from "@/helpers/utils";
 
@@ -44,28 +45,34 @@ const TopNav = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark">
-      <div className="container-fluid">
-        <a className="navbar-brand text-light" href="#">
-          TeeRex Store
-        </a>
-        <input
-          className="form-control w-50"
-          type="search"
-          placeholder="Search products"
-          value={searchText}
-          onChange={handleInputChange}
-        />
-        <div className="cart-container">
-          <button className="btn btn-light" type="submit">
-            <CartIcon />
-          </button>
-          <strong className="items-count text-dark">
-            {totalQuantityInTheCart ? totalQuantityInTheCart : ""}
-          </strong>
+    <>
+      <nav className="navbar navbar-expand-lg bg-dark">
+        <div className="container-fluid">
+          <Link className="navbar-brand text-light" to="/">
+            TeeRex Store
+          </Link>
+          <input
+            className="form-control w-50"
+            type="search"
+            placeholder="Search products"
+            value={searchText}
+            onChange={handleInputChange}
+          />
+          <div className="cart-container">
+            <Link to="/cart">
+              <button className="btn btn-light" type="submit">
+                <CartIcon />
+              </button>
+            </Link>
+            <strong className="items-count text-dark">
+              {totalQuantityInTheCart ? totalQuantityInTheCart : ""}
+            </strong>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      <Outlet />
+    </>
   );
 };
 
