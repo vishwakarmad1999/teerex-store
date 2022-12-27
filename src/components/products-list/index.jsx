@@ -9,10 +9,10 @@ const ProductsList = ({ dataUri, onProductsFetch }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchUsers();
+    if (!filteredProducts?.length) fetchProducts();
   }, []);
 
-  async function fetchUsers() {
+  async function fetchProducts() {
     const products = await http(dataUri);
     setProducts(products);
     onProductsFetch(products);

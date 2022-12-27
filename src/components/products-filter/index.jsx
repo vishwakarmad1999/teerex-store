@@ -2,7 +2,7 @@ import filterProductsPipeline from "@/helpers/utils";
 import { useProductInfo, useDispatch } from "@/stores";
 
 const ProductsFilter = () => {
-  const { filterData, selectedCheckboxes, products, searchText } =
+  const { filterData, selectedCheckboxes, products, searchText, cart } =
     useProductInfo();
   const dispatch = useDispatch();
 
@@ -11,6 +11,7 @@ const ProductsFilter = () => {
       products,
       searchText,
       selectedCheckboxes,
+      cart,
     });
 
     dispatch({

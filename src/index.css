@@ -12,3 +12,19 @@
   right: 5px;
   font-size: 65%;
 }
+
+.cart-product {
+  width: 500px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.cart-product:last-of-type {
+  border-bottom-color: black;
+}
+
+.qty-btn {
+  border-color: black;
+  margin: 0 5px;
+  padding: 0 10px;
+}

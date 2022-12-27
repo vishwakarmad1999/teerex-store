@@ -31,6 +31,7 @@ const TopNav = () => {
       products,
       searchText,
       selectedCheckboxes,
+      cart,
     });
 
     dispatch({
