@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-
 import { useProductInfo, useDispatch } from "@/stores";
-import Product from "../product";
 import http from "@/helpers/http";
+
+import Product from "../product";
 
 const ProductsList = ({ dataUri, onProductsFetch }) => {
   const { filteredProducts, cart } = useProductInfo();
@@ -79,13 +79,14 @@ const ProductsList = ({ dataUri, onProductsFetch }) => {
   }
 
   return (
-    <>
+    <div className="products-container">
+      <div className="row"></div>
       <div className="row">
         {filteredProducts.map((product) => (
           <Product key={product.id} {...product} onClick={handleProductClick} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

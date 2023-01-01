@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useProductInfo, useDispatch } from "@/stores";
 import filterProductsPipeline from "@/helpers/utils";
 
@@ -16,55 +16,64 @@ const CartIcon = () => {
 };
 
 const TopNav = () => {
-  const { searchText, selectedCheckboxes, products, cart } = useProductInfo();
+  const { selectedCheckboxes, products, cart } = useProductInfo();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   let totalQuantityInTheCart = Object.values(cart).reduce((a, b) => a + b, 0);
   if (totalQuantityInTheCart > 9) {
     totalQuantityInTheCart = "9+";
   }
 
-  function handleInputChange(e) {
-    const searchText = e.target.value;
+  function navigateTo(path) {
+    // Clear the search text and the filters
+    dispatch({
+      type: "setSearchText",
+      payload: "",
+    });
 
-    const newProducts = filterProductsPipeline({
-      products,
-      searchText,
-      selectedCheckboxes,
-      cart,
+    const newSelectedCheckboxes = {};
+    Object.keys(selectedCheckboxes).forEach((key) => {
+      newSelectedCheckboxes[key] = new Set();
     });
 
     dispatch({
-      type: "setSearchText",
-      payload: searchText,
+      type: "setSelectedCheckboxes",
+      payload: newSelectedCheckboxes,
+    });
+
+    const newProducts = filterProductsPipeline({
+      products,
+      searchText: "",
+      selectedCheckboxes: {},
+      cart,
     });
 
     dispatch({
       type: "setFilteredProducts",
       payload: newProducts,
     });
+
+    navigate(path);
   }
 
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand text-light" to="/">
+          <div
+            className="navbar-brand text-light"
+            onClick={() => navigateTo("/")}
+          >
             TeeRex Store
-          </Link>
-          <input
-            className="form-control w-50"
-            type="search"
-            placeholder="Search products"
-            value={searchText}
-            onChange={handleInputChange}
-          />
+          </div>
           <div className="cart-container">
-            <Link to="/cart">
-              <button className="btn btn-light" type="submit">
-                <CartIcon />
-              </button>
-            </Link>
+            <button
+              className="btn btn-light"
+              onClick={() => navigateTo("/cart")}
+            >
+              <CartIcon />
+            </button>
             <strong className="items-count text-dark">
               {totalQuantityInTheCart ? totalQuantityInTheCart : ""}
             </strong>

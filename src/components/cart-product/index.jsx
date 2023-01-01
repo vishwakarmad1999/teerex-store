@@ -18,7 +18,7 @@ const CartProduct = (props) => {
     <div className="cart-product mt-4">
       <div className="d-flex justify-content-between align-items-center">
         <img src={imageURL} width="100" />
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column description">
           <strong className="">{name}</strong>
           <strong>{currency + " " + price}</strong>
         </div>

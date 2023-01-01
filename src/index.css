@@ -23,8 +23,20 @@
   border-bottom-color: black;
 }
 
+.description {
+  width: 150px;
+}
+
 .qty-btn {
   border-color: black;
   margin: 0 5px;
   padding: 0 10px;
+}
+
+.navbar-brand {
+  cursor: pointer;
+}
+
+.search-box {
+  width: 95%;
 }

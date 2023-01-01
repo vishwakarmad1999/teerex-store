@@ -2,12 +2,13 @@ import { useProductInfo, useDispatch } from "@/stores";
 import ProductList from "@/components/products-list";
 import ProductFilter from "@/components/products-filter";
 import AlertMessage from "@/components/alert-message";
+import SearchBox from "@/components/search-box";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 
 const Home = () => {
-  const { filterData, errorMessage } = useProductInfo();
+  const { filterData } = useProductInfo();
   const dispatch = useDispatch();
 
   const PRODUCTS_URI =
@@ -59,6 +60,10 @@ const Home = () => {
         <div className="col-8 offset-2 mt-4">
           <AlertMessage />
         </div>
+      </div>
+
+      <div className="col-12 d-flex justify-content-center mb-4">
+        <SearchBox />
       </div>
 
       <div className="row">
